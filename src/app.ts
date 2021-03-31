@@ -13,6 +13,7 @@ import { loadControllers } from 'awilix-express';
 import container from './container';
 
 const app: express.Application = express();
+const extension = process.env.NODE_ENV === 'production' ? 'js' : 'ts';
 
 // JSON Middleware
 app.use(json());
@@ -23,7 +24,7 @@ container(app);
 
 // Controllers: define controllers path
 app.use(loadControllers(
-    'controllers/*.ts',
+    `controllers/*.${extension}`,
     { cwd: __dirname })
 );
 
